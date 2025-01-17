@@ -1,6 +1,7 @@
 import { Navbar } from "reactstrap";
 import { headerItem } from "./constant";
 import styled from "styled-components";
+import resumePdf from "../../Assets/pdf/ResumeFS.pdf";
 
 interface NavItemProps extends React.HTMLAttributes<HTMLAnchorElement> {}
 
@@ -40,11 +41,23 @@ function TopNav() {
   return (
     <Navbar color="dark" className="py-3 pe-3">
       <NavItemWrapper>
-        {headerItem.map((item) => (
-          <NavItem href={`#${item?.id}`} target="_self" key={item?.title}>
-            {item?.title}
-          </NavItem>
-        ))}
+        {headerItem.map((item) =>
+          item?.id === "resume" ? (
+            <a
+              key={item?.title}
+              href={resumePdf}
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{ color: "white" }}
+            >
+              Resume
+            </a>
+          ) : (
+            <NavItem href={`#${item?.id}`} target="_self" key={item?.title}>
+              {item?.title}
+            </NavItem>
+          )
+        )}
       </NavItemWrapper>
     </Navbar>
   );
